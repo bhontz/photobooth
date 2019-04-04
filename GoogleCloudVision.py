@@ -43,4 +43,3 @@ def GoogleCloudVision(dLandmarks, fp):
     return dLandmarks
     
     
-

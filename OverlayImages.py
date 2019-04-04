@@ -1,8 +1,6 @@
 """
    Raspberry Pi Jam GSOC Photo Booth
 
-    pygame.image.save(screen, "/users/brad/my projects/girlscout-STEM/raspberry pi/picture_overlay.png")
-
 """
 import pygame, os, sys, time
 from pygame.locals import *
@@ -426,52 +424,3 @@ def Mustache(dlm, screen, ImageList):
     del rot_sprite
     
     return    
-
-def OverlayProcess(dlm, screen):
-    
-    for k, v in dlm.iteritems():
-        if k.find("EAR") >= 0 or k.find("NOSE") >= 0:
-            print(k, v)
-    
-    screen_place_holder = screen.copy()
-    list_functions = [Landmarks, FlowerCrown, BrownieCap, EyeMask, FoxFace, DogFace, Mustache, Zorro, Alps, Cowboy, Emo]
-    list_overlay = [[], [flower_crown], [brownie_cap], [eye_mask], [fox_left_ear, fox_right_ear, fox_nose],\
-        [dog_left_ear, dog_right_ear, dog_nose, dog_tongue], [mustache], [zorrohat, zorromask], [alps], [cowboy], [emo]]
-    
-    sendback = 0    
-    i = 0
-    j = -1
-    
-    while True:
-        if j != i:
-            list_functions[i](dlm, screen, list_overlay[i])
-            j = i
-        events = pygame.event.get()
-        for e in events:
-            if e.type == KEYDOWN and e.key == 273:
-                print("Up arrow key was pressed")
-                i += 1
-                if i == len(list_functions):
-                    i = 0
-                    j = -1
-                screen.blit(screen_place_holder, (0,0))
-                pygame.display.update()
-                ###list_functions[i](dlm, screen, list_overlay[i])
-
-            elif e.type == KEYDOWN and e.key == 32:
-                print("Twitter button (space) pressed, exiting OverlapProcess()")
-                ## NEED TO SAVE THE SELECTED OVERLAP HERE!!! (note the screen overwrote it above)
-                sendback = 18
-                break
-
-        if sendback != 0:
-            break
-            
-            
-    for lst in list_overlay:  # clean up image variables
-        for l in lst:
-            if l:
-                del l
-        
-            
-    return sendback

@@ -12,7 +12,7 @@ def TwitterPost(message):
 
     with open('credentials/twitteraccountauthentication.json') as json_file:
         dictKeys = json.load(json_file)
-        twitter = Twython(dictKeys[consumer_key], dictKeys[consumer_secret], dictKeys[access_token], dictKeys[access_token_secret])
+        twitter = Twython(dictKeys["consumer_key"], dictKeys["consumer_secret"], dictKeys["access_token"], dictKeys["access_token_secret"])
         try:
             image_open = open('picture_overlay.png', 'rb')
         except IOError as detail:
