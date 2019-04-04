@@ -77,30 +77,27 @@ try:
                 screen_overlay = screen.copy()
                 ii = 0
                 jj = -1
-                try:
-                    while True:
-                        if jj != ii:
-                            list_functions[ii](dResponse, screen, list_overlay[ii])
-                            jj = ii
-                        
-                        e, last_touched = CapTouchHandler(cap, last_touched, 3)
-                        if e == 1:
-                            ii += 1
-                            if ii == len(list_functions):
-                                ii = 0
-                                jj = -1
-                            screen.blit(screen_overlay, (0,0))
-                            pygame.display.update()
-                        elif e == 2:
-                            screen.blit(pygame.image.load("overlays/twitter_logo.png"), (0,0))
-                            pygame.display.update()
-                            #TwitterPost(strTwitterMessage)
-                            time.sleep(3)
-                            raise BreakIt
+                while True:
+                    if jj != ii:
+                        list_functions[ii](dResponse, screen, list_overlay[ii])  # loop over the overlay functions ...
+                        jj = ii
+
+                    e, last_touched = CapTouchHandler(cap, last_touched, 3)
+                    if e == 1:
+                        ii += 1
+                        if ii == len(list_functions):
+                            ii = 0
+                            jj = -1
+                        screen.blit(screen_overlay, (0,0))
+                        pygame.display.update()
+                    elif e == 2:
+                        screen.blit(pygame.image.load("overlays/twitter_logo.png"), (0,0))
+                        pygame.display.update()
+                        #TwitterPost(strTwitterMessage)
+                        time.sleep(3)
+                        break
                             
-                except BreakIt:
-                    pass
-            
+
             time.sleep(5)
             overlay_flag = False
             pygame.event.clear()
