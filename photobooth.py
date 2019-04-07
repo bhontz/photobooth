@@ -2,7 +2,7 @@
    Raspberry Pi Jam GSOC Photo Booth, code for Raspberry Pi
 
 """
-import pygame, base64, os, sys, time
+import pygame, os, sys, time
 from pygame import camera
 from pygame.locals import KEYDOWN, K_ESCAPE, K_SPACE
 from GoogleCloudVision import GoogleCloudVision
@@ -14,7 +14,8 @@ from captouch import CapTouchHandler
 class BreakIt(Exception): pass  # use this to break out of nested loops
 
 strSaveImagePath = "/home/pi/photobooth/"  # this should be the script running point as well
-strTwitterMessage = "Thank you for visiting the GSOC Photobooth! @GirlScoutsOC @OCFair #WomenInSTEM #Imaginology"
+strTwitterMessage = "Thank you for visiting the GSOC Photobooth! #ImaginologyPhotobooth @GirlScoutsOC @OCFair #WomenInSTEM"
+
 list_functions = [Landmarks, FlowerCrown, BrownieCap, EyeMask, FoxFace, DogFace, Mustache, Zorro, Alps, Cowboy, Emo]
 list_overlay = [[], [flower_crown], [brownie_cap], [eye_mask], [fox_left_ear, fox_right_ear, fox_nose],\
     [dog_left_ear, dog_right_ear, dog_nose, dog_tongue], [mustache], [zorrohat, zorromask], [alps], [cowboy], [emo]]
@@ -67,6 +68,7 @@ try:
             pygame.display.update()
 
             #### Google Cloud Vision
+            dLandmarks = dict()
             fp = open(os.path.join(strSaveImagePath, 'picture.png'), 'rb')
             dResponse = GoogleCloudVision(dLandmarks, fp)
             fp.close()
@@ -91,14 +93,17 @@ try:
                         screen.blit(screen_overlay, (0,0))
                         pygame.display.update()
                     elif e == 2:
+                        pygame.image.save(screen, os.path.join(strSaveImagePath, 'picture_overlay.png'))
                         screen.blit(pygame.image.load("overlays/twitter_logo.png"), (0,0))
                         pygame.display.update()
-                        #TwitterPost(strTwitterMessage)
+                        TwitterPost(strSaveImagePath, strTwitterMessage)
                         time.sleep(3)
+                        break
+                    elif e == 0:  # start the camera feed back up, w/o twitter
                         break
                             
 
-            time.sleep(5)
+            time.sleep(2)
             overlay_flag = False
             pygame.event.clear()
 
