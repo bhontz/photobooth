@@ -52,6 +52,8 @@ fi
 unzip Adafruit_Python_MPR121-master.zip
 cd Adafruit_Python_MPR121-master
 python3 setup.py install
-
+cd ..
 pip3 install -r requirements.txt
-
+sudo chmod +x pb.sh
+sudo chmod +x photobooth.desktop
+mv photobooth.desktop ../Desktop
