@@ -13,12 +13,14 @@ Use your creativity to design cool aluminum foil buttons!
 **Requirements:**
 - Google Cloud account (https://cloud.google.com/billing/docs/how-to/manage-billing-account)
 - Twitter account
+- from these accounts, create credentials JSON files (see below)
 - Raspberry Pi with WiFi support (to connect to the Google Cloud Vision API)
 - Adafruit MPR121 capacitive touch sensor
 - Breadboard (for above) with Pi to breadboard cabling (e.g. "cobbler")
 - jumper wires to connect MPR121 to cobbler (4) and MPR121 to aligator clips (3)
 - 3 aligator clips
 - 3 aluminum foil buttons (or equivalent) 
+- **use the Raspberry Pi Configuration** menu item (Interfaces tab) to Enable I2C.  Required for the MPR121 capacitive touch sensor.
 
 **Installation:**
 
