@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=GSOC Photobooth
+Comment=Launch the GSOC Photobooth!
+Exec=/home/pi/photobooth/pb.sh
+Icon=/home/pi/photobooth/photoboothicon.png
+Terminal=false
+Type=Application
